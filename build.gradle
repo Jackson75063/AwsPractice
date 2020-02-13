@@ -1,0 +1,67 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+	id 'idea'
+}
+
+group = 'ua.jackson'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'ua.jackson.awsPractice.AwsPracticeApplication'
+		)
+	}
+}
+
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	awsSdkVersion = '2.10.30'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	compile group: 'software.amazon.awssdk', name: 'sqs', version: "${awsSdkVersion}"
+	compile group: 'software.amazon.awssdk', name: 'sns', version: "${awsSdkVersion}"
+	compile group: 'software.amazon.awssdk', name: 's3', version: "${awsSdkVersion}"
+	compile group: 'software.amazon.awssdk', name: 'dynamodb', version: "${awsSdkVersion}"
+
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.0'
+
+
+
+	compile 'io.springfox:springfox-swagger2:2.9.2'
+	compile 'io.springfox:springfox-swagger-ui:2.9.2'
+
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	implementation 'junit:junit:4.12'
+}
+
+test {
+	useJUnitPlatform()
+}
+
