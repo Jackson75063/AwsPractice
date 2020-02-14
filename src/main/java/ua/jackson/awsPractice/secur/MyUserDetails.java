@@ -1,3 +1,4 @@
+/*
 package ua.jackson.awsPractice.secur;
 
 
@@ -60,4 +61,4 @@ public class MyUserDetails implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
-}
+}*/

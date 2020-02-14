@@ -1,21 +1,49 @@
-package ua.jackson.awsPractice.controller;
+package ua.jackson.awsPractice.SO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ua.jackson.awsPractice.SO.*;
 import ua.jackson.awsPractice.entity.Guest;
 import ua.jackson.awsPractice.repository.GuestRepo;
 
 import java.util.List;
 
+
 @RestController
+@CrossOrigin
 public class GreetingController {
 
-    @Autowired(required = false)
+    @Autowired
     GuestRepo guestRepo;
 
+    @Autowired
+    TouristService touristService;
+
+    @Autowired
+    TouristRepo touristRepo;
+
+    @Autowired
+    FlightRepo flightRepo;
+
+    @GetMapping("/edit/{id}")
+    public Tourist editTourist(@PathVariable Long id){
+        return this.touristRepo.getOne(id);
+    }
+
+    @GetMapping("/edit2/{id}")
+    public Flight editTourist2(@PathVariable Long id){
+        return this.flightRepo.getOne(id);
+    }
+
+
+
+
+    @PostMapping("/test2")
+    public String name22(@RequestBody Boolean flag){
+        if(flag)
+            return "true";
+        return "false";
+    }
 
     @GetMapping("/getOne/{id}")
     public Guest getGuestById(@PathVariable Long id){
