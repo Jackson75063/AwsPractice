@@ -1,7 +1,9 @@
 package ua.jackson.awsPractice.SO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import ua.jackson.awsPractice.SO.*;
 import ua.jackson.awsPractice.entity.Guest;
 import ua.jackson.awsPractice.repository.GuestRepo;
@@ -38,10 +40,19 @@ public class GreetingController {
 
 
 
-    @PostMapping("/test2")
-    public String name22(@RequestBody Boolean flag){
-        if(flag)
-            return "true";
+    @GetMapping("/test2")
+    public String name22(){
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://google.com", String.class);
+
+        System.out.println(forEntity.getStatusCode().value() == 200);
+//
+//        if(flag)
+//
+
+//            return "true";
         return "false";
     }
 
@@ -64,8 +75,9 @@ public class GreetingController {
 
     @GetMapping("/del/{id}")
     public void delGuest(@PathVariable Long id){
-        guestRepo.deleteById(id);
-    }
+
+            guestRepo.deleteById(id);
+        }
 
 
 
@@ -77,4 +89,4 @@ public class GreetingController {
 //        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
 //    }
 
-}
+    }

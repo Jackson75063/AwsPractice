@@ -81,4 +81,6 @@ public class Tourist {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+
 }
