@@ -1,10 +1,10 @@
+/*
 package ua.jackson.awsPractice.SO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import ua.jackson.awsPractice.SO.*;
 import ua.jackson.awsPractice.entity.Guest;
 import ua.jackson.awsPractice.repository.GuestRepo;
 
@@ -28,7 +28,7 @@ public class GreetingController {
     FlightRepo flightRepo;
 
     @GetMapping("/edit/{id}")
-    public Tourist editTourist(@PathVariable Long id){
+    public Depart editTourist(@PathVariable Long id){
         return this.touristRepo.getOne(id);
     }
 
@@ -89,4 +89,4 @@ public class GreetingController {
 //        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
 //    }
 
-    }
+    }*/

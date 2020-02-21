@@ -3,10 +3,9 @@ package ua.jackson.awsPractice.awsConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain;
-import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import ua.jackson.awsPractice.service.SqsService;
@@ -19,6 +18,22 @@ public class GlobalAwsConfig {
 
     @Value("${sqsQueueUrl}")
     private String queueUrl;
+
+    @Value("${AWS_ACCESS_KEY_ID}")
+    String accessKeyId;
+
+    @Value("${AWS_SECRET_ACCESS_KEY}")
+    String secretAccessKey;
+
+    @Bean
+    DynamoDbClient dynamoDbClient() {
+
+        return DynamoDbClient.builder()
+                .region(Region.US_EAST_2)
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKeyId
+                        , secretAccessKey)))
+                .build();
+    }
 
     @Bean
     public AwsCredentialsProvider awsCredentialsProvider() {

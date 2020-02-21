@@ -1,3 +1,4 @@
+/*
 package ua.jackson.awsPractice.controller;
 
 import org.junit.jupiter.api.Test;
@@ -61,4 +62,4 @@ class GreetingControllerTest {
     @Test
     void delGuest() {
     }
-}
+}*/
