@@ -106,4 +106,10 @@ public class TestContrl {
         facultyRepo.save(faculty);
         return faculty.toString();
     }
+
+ /*   @GetMapping("/tt")
+    public List<Abiturient> alla(){
+        return abitRepos.findTopByAvgDiplomaMark();
+    }*/
+
 }

@@ -21,15 +21,11 @@ public class Abiturient {
 
     private Integer requestCounter;
 
-    //    @JoinTable(name = "subjectTable", joinColumns = @JoinColumn(name = "idAbitCode"))
-//    @JsonIgnore
     @ElementCollection(fetch = FetchType.LAZY)
-//    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT,
-    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO BALU"), joinColumns = @JoinColumn(name = "ABIT_ID"))
+    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
     @MapKeyColumn(name = "Subject", length = 40, nullable = false)
     @MapKeyClass(Subject.class)
     @MapKeyEnumerated(EnumType.STRING)
-    @Column(name = "znoSubjectList", nullable = false)
     private Map<Subject,Float> znoSubjectList;
 
 /*
@@ -39,8 +35,6 @@ public class Abiturient {
     @ElementCollection(targetClass = Subject.class)
     private List<Subject> znoSubjectList;
 */
-
-
 
     public Abiturient() {
     }
