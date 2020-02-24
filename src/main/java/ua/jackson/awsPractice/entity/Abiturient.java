@@ -1,11 +1,13 @@
 package ua.jackson.awsPractice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
-@Table(name = "ab2")
-public class Abiturient2 {
+public class Abiturient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,14 +16,33 @@ public class Abiturient2 {
     private String name;
     private String surname;
     private Double avgDiplomaMark;
+    @ManyToMany()
     private List<Faculty> faculties;
 
     private Integer requestCounter;
 
-    private List<Subject> subjectList;
+    //    @JoinTable(name = "subjectTable", joinColumns = @JoinColumn(name = "idAbitCode"))
+//    @JsonIgnore
+    @ElementCollection(fetch = FetchType.LAZY)
+//    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT,
+    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO BALU"), joinColumns = @JoinColumn(name = "ABIT_ID"))
+    @MapKeyColumn(name = "Subject", length = 40, nullable = false)
+    @MapKeyClass(Subject.class)
+    @MapKeyEnumerated(EnumType.STRING)
+    @Column(name = "znoSubjectList", nullable = false)
+    private Map<Subject,Float> znoSubjectList;
+
+/*
+    @JoinTable(name = "subjectTable", joinColumns = @JoinColumn(name = "idAbitCode"))
+    @Column(name = "subjects", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Subject.class)
+    private List<Subject> znoSubjectList;
+*/
 
 
-    public Abiturient2() {
+
+    public Abiturient() {
     }
 
     public Long getIdAbitCode() {
@@ -72,11 +93,11 @@ public class Abiturient2 {
         this.requestCounter = requestCounter;
     }
 
-    public List<Subject> getSubjectList() {
-        return subjectList;
+    public Map<Subject, Float> getZnoSubjectList() {
+        return znoSubjectList;
     }
 
-    public void setSubjectList(List<Subject> subjectList) {
-        this.subjectList = subjectList;
+    public void setZnoSubjectList(Map<Subject, Float> znoSubjectList) {
+        this.znoSubjectList = znoSubjectList;
     }
 }

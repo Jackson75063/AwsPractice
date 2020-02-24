@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 import ua.jackson.awsPractice.SO.GreetingController;
-import ua.jackson.awsPractice.entity.Guest;
+import ua.jackson.awsPractice.entity.garbage.Guest;
 import ua.jackson.awsPractice.repository.GuestRepo;
 
 import java.util.List;

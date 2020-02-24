@@ -1,4 +1,6 @@
-package ua.jackson.awsPractice.entity;
+package ua.jackson.awsPractice.entity.garbage;
+
+import ua.jackson.awsPractice.entity.Subject;
 
 import javax.persistence.*;
 import java.util.Set;

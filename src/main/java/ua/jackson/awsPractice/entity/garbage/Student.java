@@ -1,4 +1,5 @@
-package ua.jackson.awsPractice.entity;
+/*
+package ua.jackson.awsPractice.entity.garbage;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -63,3 +64,4 @@ public class Student {
                 '}';
     }
 }
+*/

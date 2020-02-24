@@ -1,3 +1,4 @@
+/*
 package ua.jackson.awsPractice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,3 +32,4 @@ public class DiplomaController {
 
 }
 
+*/

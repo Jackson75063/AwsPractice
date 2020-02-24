@@ -1,3 +1,4 @@
+/*
 package ua.jackson.awsPractice.SO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Depart")
-public class Abit {
+public class Depart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,13 +78,13 @@ public class Abit {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Abit abit = (Abit) o;
-        return Objects.equals(id, abit.id) &&
-                Objects.equals(firstName, abit.firstName) &&
-                Objects.equals(lastName, abit.lastName) &&
-                Objects.equals(avg, abit.avg) &&
-                Objects.equals(country, abit.country) &&
-                Objects.equals(abitturs, abit.abitturs);
+        Depart depart = (Depart) o;
+        return Objects.equals(id, depart.id) &&
+                Objects.equals(firstName, depart.firstName) &&
+                Objects.equals(lastName, depart.lastName) &&
+                Objects.equals(avg, depart.avg) &&
+                Objects.equals(country, depart.country) &&
+                Objects.equals(abitturs, depart.abitturs);
     }
 
     @Override
@@ -91,16 +92,19 @@ public class Abit {
         return Objects.hash(id, firstName, lastName, avg, country, abitturs);
     }
 
-    public Abit() {
+    public Depart() {
     }
 
-    /*
+    */
+/*
     @ManyToMany()
     @JoinTable(
             name = "Depart_ student",
             joinColumns =  @JoinColumn(name = "Depart_id"),
             inverseJoinColumns = @JoinColumn(name = "abiturient_id"))
     private Set<Abiturient> abiturients;
-  */
+  *//*
+
 
 }
+*/

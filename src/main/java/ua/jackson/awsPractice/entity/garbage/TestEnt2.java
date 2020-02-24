@@ -1,4 +1,6 @@
 package ua.jackson.awsPractice.entity.garbage;
 
-public interface TestEnt {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TestEnt2 extends JpaRepository<TestEnt,Long> {
 }

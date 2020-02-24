@@ -1,4 +1,5 @@
-package ua.jackson.awsPractice.entity;
+/*
+package ua.jackson.awsPractice.entity.garbage;
 
 import org.hibernate.annotations.Proxy;
 import org.springframework.context.annotation.Lazy;
@@ -75,3 +76,4 @@ public class Guest {
         return Objects.hash(id, name, surname);
     }
 }
+*/
