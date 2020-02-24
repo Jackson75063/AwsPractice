@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ua.jackson.awsPractice.dto.AllFacultiesDto;
+import ua.jackson.awsPractice.dto.FacultyDto;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Faculty;
 import ua.jackson.awsPractice.entity.Specialization;
@@ -91,7 +93,7 @@ public class TestContrl {
     }
 
     @GetMapping("/allAb")
-    public List<Abiturient> allAbits(){
+    public List<Abiturient> allAbitsFullInfo(){
         return abitRepos.findAll();
     }
 
@@ -139,6 +141,28 @@ public class TestContrl {
     public Map<Specialization, Long> addxzcasd(){
         return specializationService.mostPopularSpecialization();
     }
+
+    @GetMapping("/asd")
+    public FacultyDto allAbitsList(){
+
+        FacultyDto facultyDto = new FacultyDto();
+        Set<Abiturient>  abiturients = new HashSet<>(abitRepos.findAll());
+        facultyDto.setAbiturients(abiturients);
+
+        return facultyDto;
+    }
+
+    @GetMapping("/qwe")
+    public AllFacultiesDto allFacultiesDto(){
+
+        AllFacultiesDto facultyDto = new AllFacultiesDto();
+        Set<Faculty>  abiturients = new HashSet<>(facultyRepo.findAll());
+        facultyDto.setFaculties(abiturients);
+
+        return facultyDto;
+    }
+
+
 
 }
 

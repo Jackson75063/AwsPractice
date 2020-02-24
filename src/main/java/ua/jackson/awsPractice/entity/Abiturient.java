@@ -10,6 +10,7 @@ import java.util.Map;
 @Entity
 public class Abiturient {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAbitCode;

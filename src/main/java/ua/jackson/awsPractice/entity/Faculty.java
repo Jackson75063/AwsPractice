@@ -14,9 +14,9 @@ public class Faculty {
 
     private String facultyName;
 
-    @ManyToMany
-    @JsonIgnoreProperties("abiturients")
-    private Set<Abiturient> abiturients;
+//    @ManyToMany
+//    @JsonIgnoreProperties("faculties")
+//    private Set<Abiturient> abiturients;
 
     @OneToMany
     private Set<Specialization> specializations;
@@ -57,11 +57,11 @@ public class Faculty {
                 '}';
     }
 
-    public Set<Abiturient> getAbiturients() {
+    /*public Set<Abiturient> getAbiturients() {
         return abiturients;
     }
 
     public void setAbiturients(Set<Abiturient> abiturients) {
         this.abiturients = abiturients;
-    }
+    }*/
 }
