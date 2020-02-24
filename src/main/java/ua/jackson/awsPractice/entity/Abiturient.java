@@ -1,6 +1,7 @@
 package ua.jackson.awsPractice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,13 +18,14 @@ public class Abiturient {
     private String surname;
     private Double avgDiplomaMark;
     @ManyToMany()
+    @JsonIgnoreProperties("abiturients")
     private List<Faculty> faculties;
 
     private Integer requestCounter;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
-    @MapKeyColumn(name = "Subject", length = 40, nullable = false)
+    @MapKeyColumn(name = "Subject", length = 40)
     @MapKeyClass(Subject.class)
     @MapKeyEnumerated(EnumType.STRING)
     private Map<Subject,Float> znoSubjectList;

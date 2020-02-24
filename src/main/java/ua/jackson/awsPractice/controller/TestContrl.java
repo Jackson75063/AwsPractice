@@ -14,6 +14,9 @@ import ua.jackson.awsPractice.entity.garbage.TestEnt2;
 import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.FacultyRepo;
 import ua.jackson.awsPractice.repository.SpecRepo;
+import ua.jackson.awsPractice.service.AbiturientService;
+import ua.jackson.awsPractice.service.FacultyService;
+import ua.jackson.awsPractice.service.SpecializationService;
 
 import java.util.*;
 
@@ -32,6 +35,15 @@ public class TestContrl {
 
     @Autowired
     private FacultyRepo facultyRepo;
+
+    @Autowired
+    private FacultyService facultyService;
+
+    @Autowired
+    private SpecializationService specializationService;
+
+    @Autowired
+    private AbiturientService abitS;
 
     @GetMapping("/test")
     private String yeah(){
@@ -112,4 +124,21 @@ public class TestContrl {
         return abitRepos.findTopByAvgDiplomaMark();
     }*/
 
+
+    @GetMapping("/max")
+    public Abiturient maxAVG() {
+        return abitS.abitWithMaxAvgMark();
+    }
+
+    @GetMapping("/allAA")
+    public List<Abiturient> allADD(){
+        return abitS.getAllAbits();
+    }
+
+    @GetMapping("/zxc")
+    public Map<Specialization, Long> addxzcasd(){
+        return specializationService.mostPopularSpecialization();
+    }
+
 }
+

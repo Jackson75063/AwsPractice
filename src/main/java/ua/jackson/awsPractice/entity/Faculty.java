@@ -1,5 +1,7 @@
 package ua.jackson.awsPractice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,6 +13,10 @@ public class Faculty {
     private Long facultyIdl;
 
     private String facultyName;
+
+    @ManyToMany
+    @JsonIgnoreProperties("abiturients")
+    private Set<Abiturient> abiturients;
 
     @OneToMany
     private Set<Specialization> specializations;
@@ -49,5 +55,13 @@ public class Faculty {
                 ", facultyName='" + facultyName + '\'' +
                 ", specializations=" + specializations +
                 '}';
+    }
+
+    public Set<Abiturient> getAbiturients() {
+        return abiturients;
+    }
+
+    public void setAbiturients(Set<Abiturient> abiturients) {
+        this.abiturients = abiturients;
     }
 }
