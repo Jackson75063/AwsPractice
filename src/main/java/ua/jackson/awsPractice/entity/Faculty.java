@@ -1,6 +1,8 @@
 package ua.jackson.awsPractice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,9 +16,10 @@ public class Faculty {
 
     private String facultyName;
 
-//    @ManyToMany
-//    @JsonIgnoreProperties("faculties")
-//    private Set<Abiturient> abiturients;
+    @ManyToMany
+    @JsonIgnoreProperties("faculties")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Abiturient> abiturients;
 
     @OneToMany
     private Set<Specialization> specializations;
@@ -46,6 +49,14 @@ public class Faculty {
 
     public void setSpecializations(Set<Specialization> specializations) {
         this.specializations = specializations;
+    }
+
+    public Set<Abiturient> getAbiturients() {
+        return abiturients;
+    }
+
+    public void setAbiturients(Set<Abiturient> abiturients) {
+        this.abiturients = abiturients;
     }
 
     @Override

@@ -2,6 +2,8 @@ package ua.jackson.awsPractice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,6 +22,7 @@ public class Abiturient {
     private Double avgDiplomaMark;
     @ManyToMany()
     @JsonIgnoreProperties("abiturients")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Faculty> faculties;
 
     private Integer requestCounter;
@@ -96,5 +99,18 @@ public class Abiturient {
 
     public void setZnoSubjectList(Map<Subject, Float> znoSubjectList) {
         this.znoSubjectList = znoSubjectList;
+    }
+
+    @Override
+    public String toString() {
+        return "Abiturient{" +
+                "idAbitCode=" + idAbitCode +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", avgDiplomaMark=" + avgDiplomaMark +
+                ", faculties=" + faculties +
+                ", requestCounter=" + requestCounter +
+                ", znoSubjectList=" + znoSubjectList +
+                '}';
     }
 }

@@ -1,9 +1,9 @@
 package ua.jackson.awsPractice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-git aimport ua.jackson.awsPractice.entity.Abiturient;
-
+import ua.jackson.awsPractice.entity.Abiturient;
 import java.util.Set;
+
 
 public class FacultyDto {
 
