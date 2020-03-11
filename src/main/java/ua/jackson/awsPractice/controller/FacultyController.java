@@ -42,4 +42,9 @@ public class FacultyController {
         return facultyDto;
     }
 
+    @GetMapping("/allFaName")
+    public List<String> name(){
+        return this.facultyService.allFacultiesNameList();
+    }
+
 }

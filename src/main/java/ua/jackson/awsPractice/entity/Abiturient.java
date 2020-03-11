@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ua.jackson.awsPractice.maptest.ZNOOneSubject;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 public class Abiturient {
@@ -27,14 +30,25 @@ public class Abiturient {
 
     private Integer requestCounter;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
-    @MapKeyColumn(name = "Subject", length = 40)
-    @MapKeyClass(Subject.class)
-    @MapKeyEnumerated(EnumType.STRING)
-    private Map<Subject,Float> znoSubjectList;
+    @ElementCollection
+    private Set<ZNOOneSubject> subjs = new HashSet<>(4);
 
-/*
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
+//    @MapKeyColumn(name = "Subject", length = 40)
+//    @MapKeyClass(Subject.class)
+//    @MapKeyEnumerated(EnumType.STRING)
+//    private Map<Subject,Float> znoSubjectList;
+
+    public Set<ZNOOneSubject> getSubjs() {
+        return subjs;
+    }
+
+    public void setSubjs(Set<ZNOOneSubject> subjs) {
+        this.subjs = subjs;
+    }
+
+    /*
     @JoinTable(name = "subjectTable", joinColumns = @JoinColumn(name = "idAbitCode"))
     @Column(name = "subjects", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -93,14 +107,6 @@ public class Abiturient {
         this.requestCounter = requestCounter;
     }
 
-    public Map<Subject, Float> getZnoSubjectList() {
-        return znoSubjectList;
-    }
-
-    public void setZnoSubjectList(Map<Subject, Float> znoSubjectList) {
-        this.znoSubjectList = znoSubjectList;
-    }
-
     @Override
     public String toString() {
         return "Abiturient{" +
@@ -110,7 +116,7 @@ public class Abiturient {
                 ", avgDiplomaMark=" + avgDiplomaMark +
                 ", faculties=" + faculties +
                 ", requestCounter=" + requestCounter +
-                ", znoSubjectList=" + znoSubjectList +
+                ", subjs=" + subjs +
                 '}';
     }
 }

@@ -44,8 +44,8 @@ public class AbitController {
     @CrossOrigin("http://localhost:4200")
     @PostMapping(value = "/addAbit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String addedAbitur(@RequestBody Abiturient abiturient){
-        this.abitRepos.save(abiturient);
-
+//        this.abitRepos.save(abiturient);
+        System.out.println(abiturient);
         return abiturient.toString();
     }
 
