@@ -1,12 +1,17 @@
+/*
 package ua.jackson.awsPractice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.jackson.awsPractice.entity.Specialization;
+import ua.jackson.awsPractice.entity.Subject;
 import ua.jackson.awsPractice.service.SpecializationService;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class TestContrl {
@@ -17,7 +22,6 @@ public class TestContrl {
     @Autowired
     private SpecializationService specializationService;
 
-/*
     @GetMapping("/test")
     private String yeah(){
 
@@ -55,12 +59,14 @@ public class TestContrl {
         english.forEach(System.out::println);
         return  all;
     }
-*/
 
- /*   @GetMapping("/tt")
+
+
+   @GetMapping("/tt")
     public List<Abiturient> alla(){
         return abitRepos.findTopByAvgDiplomaMark();
-    }*/
+    }
+
 
     @GetMapping("/zxc")
     public Map<Specialization, Long> addxzcasd(){
@@ -69,3 +75,4 @@ public class TestContrl {
 
 }
 
+*/
