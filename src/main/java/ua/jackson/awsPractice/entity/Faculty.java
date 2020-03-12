@@ -16,11 +16,11 @@ public class Faculty {
 
     private String facultyName;
 
-    @ManyToMany
+  /*  @ManyToMany
     @JsonIgnoreProperties("faculties")
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Abiturient> abiturients;
-
+*/
     @OneToMany
     private Set<Specialization> specializations;
 
@@ -51,13 +51,13 @@ public class Faculty {
         this.specializations = specializations;
     }
 
-    public Set<Abiturient> getAbiturients() {
-        return abiturients;
-    }
-
-    public void setAbiturients(Set<Abiturient> abiturients) {
-        this.abiturients = abiturients;
-    }
+//    public Set<Abiturient> getAbiturients() {
+//        return abiturients;
+//    }
+//
+//    public void setAbiturients(Set<Abiturient> abiturients) {
+//        this.abiturients = abiturients;
+//    }
 
     @Override
     public String toString() {

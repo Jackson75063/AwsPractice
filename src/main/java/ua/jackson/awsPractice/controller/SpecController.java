@@ -20,6 +20,8 @@ public class SpecController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin("http://localhost:4200")
     public String addedSpec(@RequestBody Specialization specialization){
+
+
         this.specRepo.save(specialization);
         System.out.println(specialization);
         return specialization.toString();

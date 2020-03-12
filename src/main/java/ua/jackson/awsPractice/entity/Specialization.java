@@ -14,7 +14,7 @@ public class Specialization {
 
     private String specializationName;
 
-    @Enumerated(value = EnumType.STRING)
+/*    @Enumerated(value = EnumType.STRING)
     @Column(name = "requiredSubjects", nullable = false)
     @ElementCollection(targetClass = Subject.class)
     Set<Subject> requiredSubjects;
@@ -22,9 +22,9 @@ public class Specialization {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "optionalSubjects", nullable = false)
     @ElementCollection(targetClass = Subject.class)
-    Set<Subject> optionalSubjecst;
+    Set<Subject> optionalSubjecst;*/
 
-    @Override
+  /*  @Override
     public String toString() {
         return "Specialization{" +
                 "id=" + id +
@@ -33,7 +33,7 @@ public class Specialization {
                 ", requiredSubjects=" + requiredSubjects +
                 ", optionalSubjecst=" + optionalSubjecst +
                 '}';
-    }
+    }*/
 
     public Specialization() {
     }
@@ -61,7 +61,8 @@ public class Specialization {
     public void setSpecializationName(String specializationName) {
         this.specializationName = specializationName;
     }
-
+}
+/*
     public Set<Subject> getRequiredSubjects() {
         return requiredSubjects;
     }
@@ -77,7 +78,7 @@ public class Specialization {
     public void setOptionalSubjecst(Set<Subject> optionalSubjecst) {
         this.optionalSubjecst = optionalSubjecst;
     }
-}
+}*/
 /*
 
 {

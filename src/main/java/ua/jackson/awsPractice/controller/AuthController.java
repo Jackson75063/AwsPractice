@@ -1,4 +1,4 @@
-package ua.jackson.awsPractice.controllers;
+package ua.jackson.awsPractice.controller;
 
 
 import java.util.HashSet;
@@ -56,13 +56,16 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+        System.out.println(jwt);
+
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
+        List<String> roles = userDetails.getAuthorities()
+                .stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
@@ -84,39 +87,46 @@ public class AuthController {
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email уже використовується!"));
+                    .body(new MessageResponse(" Email уже використовується!"));
         }
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
+/*
+
+        // Create new user's account
+        User user = new User(signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()));
+*/
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Роль не знайдена."));
+                    .orElseThrow(() -> new RuntimeException(" Роль не знайдена."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Роль не знайдена."));
+                                .orElseThrow(() -> new RuntimeException(" Роль не знайдена."));
                         roles.add(adminRole);
 
                         break;
                     case "mod":
                         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Роль не знайдена."));
+                                .orElseThrow(() -> new RuntimeException(" Роль не знайдена."));
                         roles.add(modRole);
 
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Роль не знайдена."));
+                                .orElseThrow(() -> new RuntimeException(" Роль не знайдена."));
                         roles.add(userRole);
                 }
             });

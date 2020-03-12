@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class FacultyDto {
 
-    @JsonIgnoreProperties("faculties")
+    @JsonIgnoreProperties("abiturients")
     private Set<Abiturient> abiturients;
 
     public Set<Abiturient> getAbiturients() {
@@ -15,6 +15,11 @@ public class FacultyDto {
     }
 
     public void setAbiturients(Set<Abiturient> abiturients) {
+        this.abiturients = abiturients;
+    }
+
+
+    public FacultyDto(Set<Abiturient> abiturients) {
         this.abiturients = abiturients;
     }
 }

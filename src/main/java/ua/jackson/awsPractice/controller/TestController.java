@@ -1,4 +1,4 @@
-package ua.jackson.awsPractice.controllers;
+package ua.jackson.awsPractice.controller;
 
 
 import org.springframework.security.access.prepost.PreAuthorize;

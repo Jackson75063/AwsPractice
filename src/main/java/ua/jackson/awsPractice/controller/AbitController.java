@@ -75,15 +75,15 @@ public class AbitController {
     }
 
 
-    @GetMapping(value = "/asd", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
-    public FacultyDto allAbitsList(){
+//    @GetMapping(value = "/asd", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+//    public FacultyDto allAbitsList(){
 
-        FacultyDto facultyDto = new FacultyDto();
-        Set<Abiturient> abiturients = new HashSet<>(abitRepos.findAll());
-        facultyDto.setAbiturients(abiturients);
-
-        return facultyDto;
-    }
+//        FacultyDto facultyDto = new FacultyDto();
+//        Set<Abiturient> abiturients = new HashSet<>(abitRepos.findAll());
+//        facultyDto.setAbiturients(abiturients);
+//
+//        return facultyDto;
+//    }
 
     @GetMapping(value = "/max/{subject}", produces = MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
     public List<Abiturient> maxBySubject(@PathVariable Subject subject){
