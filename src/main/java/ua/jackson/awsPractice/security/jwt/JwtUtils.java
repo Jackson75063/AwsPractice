@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import ua.jackson.awsPractice.security.service.UserDetailsImpl;
+import ua.jackson.awsPractice.security.service.AbitDetailsImpl;
 
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        AbitDetailsImpl userPrincipal = (AbitDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
 //                .setSubject((userPrincipal.getName()))

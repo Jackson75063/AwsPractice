@@ -6,23 +6,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.jackson.awsPractice.models.User;
-import ua.jackson.awsPractice.repo.UserRepository;
+import ua.jackson.awsPractice.entity.Abiturient;
+import ua.jackson.awsPractice.repository.AbitRepos;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AbitDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    AbitRepos userRepository;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        Abiturient abiturient = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + email));
 
-        System.out.println( "user details repo  " +user);
+        System.out.println( "user details repo  " +abiturient);
 
-        return UserDetailsImpl.build(user);
+        return AbitDetailsImpl.build(abiturient);
     }
 
 }

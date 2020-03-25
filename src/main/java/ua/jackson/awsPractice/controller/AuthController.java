@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.models.ERole;
 import ua.jackson.awsPractice.models.Role;
-import ua.jackson.awsPractice.models.User;
 import ua.jackson.awsPractice.payload.request.LoginRequest;
 import ua.jackson.awsPractice.payload.request.SignupRequest;
 import ua.jackson.awsPractice.payload.response.JwtResponse;
 import ua.jackson.awsPractice.payload.response.MessageResponse;
 import ua.jackson.awsPractice.repo.RoleRepository;
-import ua.jackson.awsPractice.repo.UserRepository;
+import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.security.jwt.JwtUtils;
-import ua.jackson.awsPractice.security.service.UserDetailsImpl;
+import ua.jackson.awsPractice.security.service.AbitDetailsImpl;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -41,7 +41,8 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+//    UserRepository userRepository;
+    AbitRepos abitRepos;
 
     @Autowired
     RoleRepository roleRepository;
@@ -63,7 +64,7 @@ public class AuthController {
 
         System.out.println(jwt);
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        AbitDetailsImpl userDetails = (AbitDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities()
                 .stream()
                 .map(item -> item.getAuthority())
@@ -84,14 +85,18 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 */
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (abitRepos.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse(" Email уже використовується!"));
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
+//        User user = new User(signUpRequest.getUsername(),
+//                signUpRequest.getEmail(),
+//                encoder.encode(signUpRequest.getPassword()));
+
+        Abiturient user = new Abiturient(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 /*
@@ -133,7 +138,7 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+        abitRepos.save(user);
 
         return ResponseEntity.ok(new MessageResponse("Користувач успішно зареєстрований!!!"));
     }

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductControllerTest {
 
     @Autowired
-    private HomeController homeController;
+    private TestController homeController;
 
     @Test
     public void test() throws Exception{

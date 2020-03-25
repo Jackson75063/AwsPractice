@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ua.jackson.awsPractice.security.jwt.AuthEntryPointJwt;
 import ua.jackson.awsPractice.security.jwt.AuthTokenFilter;
-import ua.jackson.awsPractice.security.service.UserDetailsServiceImpl;
+import ua.jackson.awsPractice.security.service.AbitDetailsServiceImpl;
 
 
 @Configuration
@@ -26,8 +26,9 @@ import ua.jackson.awsPractice.security.service.UserDetailsServiceImpl;
         // jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    AbitDetailsServiceImpl abitDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -39,8 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-        System.out.println( "User details " +userDetailsService);
+        authenticationManagerBuilder.userDetailsService(abitDetailsService).passwordEncoder(passwordEncoder());
+        System.out.println( "User details " + abitDetailsService);
     }
 
     @Bean

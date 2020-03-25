@@ -58,6 +58,16 @@ dependencies {
 	compile group: 'log4j', name: 'log4j', version: '1.2.17'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
 
+//	compile "org.flywaydb: flyway-core"
+
+	// https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+	compile group: 'org.flywaydb', name: 'flyway-core', version: '6.3.0'
+
+
+//	providedCompile group: 'org.wildfly', name: 'wildfly-feature-pack', version: '18.0.1.Final'
+
+
+
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

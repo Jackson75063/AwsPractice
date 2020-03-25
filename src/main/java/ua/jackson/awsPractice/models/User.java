@@ -1,3 +1,4 @@
+/*
 package ua.jackson.awsPractice.models;
 
 
@@ -100,3 +101,4 @@ public class User {
                 '}';
     }
 }
+*/

@@ -3,20 +3,14 @@ package ua.jackson.awsPractice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ua.jackson.awsPractice.dto.FacultyDto;
 import ua.jackson.awsPractice.entity.Abiturient;
-import ua.jackson.awsPractice.entity.Faculty;
-import ua.jackson.awsPractice.entity.Specialization;
 import ua.jackson.awsPractice.entity.Subject;
 import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.FacultyRepo;
 import ua.jackson.awsPractice.repository.SpecRepo;
 import ua.jackson.awsPractice.service.AbiturientService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
 
 @CrossOrigin("*")
 @RestController
@@ -44,7 +38,7 @@ public class AbitController {
     @CrossOrigin("http://localhost:4200")
     @PostMapping(value = "/addAbit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String addedAbitur(@RequestBody Abiturient abiturient){
-//        this.abitRepos.save(abiturient);
+        this.abitRepos.save(abiturient);
         System.out.println(abiturient);
         return abiturient.toString();
     }
@@ -90,4 +84,17 @@ public class AbitController {
         return  abitS.abitWithGreaterMark(subject,"");
     }
 
+
+
+  /*  @GetMapping("/allAbPa")
+    public ResponseEntity<Page<Abiturient>> getAllEmployees(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy)
+    {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Page<Abiturient> list =  abitRepos.findAll(paging);
+
+        return new ResponseEntity<List<Abiturient>>(list, new HttpHeaders(), HttpStatus.OK);
+    }*/
 }

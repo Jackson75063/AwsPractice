@@ -1,18 +1,26 @@
 package ua.jackson.awsPractice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ua.jackson.awsPractice.maptest.ZNOOneSubject;
+import ua.jackson.awsPractice.models.Role;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+
 @Entity
+@Table(	name = "Abiturients",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class Abiturient {
 
 
@@ -20,9 +28,28 @@ public class Abiturient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAbitCode;
 
-    private String name;
+    private String username;
     private String surname;
+    private String poBatkovi;
     private Double avgDiplomaMark;
+
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(max = 120)
+    private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
+
     @ManyToMany()
     @JsonIgnoreProperties("abiturients")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -32,6 +59,13 @@ public class Abiturient {
 
     @ElementCollection
     private Set<ZNOOneSubject> subjs = new HashSet<>(4);
+
+    public Abiturient(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
 
 //    @ElementCollection(fetch = FetchType.LAZY)
 //    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
@@ -67,12 +101,12 @@ public class Abiturient {
         this.idAbitCode = idAbitCode;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public String getSurname() {
@@ -107,13 +141,50 @@ public class Abiturient {
         this.requestCounter = requestCounter;
     }
 
+
+    public String getPoBatkovi() {
+        return poBatkovi;
+    }
+
+    public void setPoBatkovi(String poBatkovi) {
+        this.poBatkovi = poBatkovi;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "Abiturient{" +
                 "idAbitCode=" + idAbitCode +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", surname='" + surname + '\'' +
+                ", poBatkovi='" + poBatkovi + '\'' +
                 ", avgDiplomaMark=" + avgDiplomaMark +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 ", faculties=" + faculties +
                 ", requestCounter=" + requestCounter +
                 ", subjs=" + subjs +
