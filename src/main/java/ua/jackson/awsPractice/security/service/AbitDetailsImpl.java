@@ -16,9 +16,8 @@ public class AbitDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
     private String username;
-
+    private String surname;
     private String email;
 
     @JsonIgnore
@@ -26,10 +25,11 @@ public class AbitDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public AbitDetailsImpl(Long id, String username, String email, String password,
+    public AbitDetailsImpl(Long id, String username, String surname, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -43,6 +43,7 @@ public class AbitDetailsImpl implements UserDetails {
         return new AbitDetailsImpl(
                 abiturient.getIdAbitCode(),
                 abiturient.getUsername(),
+                abiturient.getSurname(),
                 abiturient.getEmail(),
                 abiturient.getPassword(),
                 authorities);
@@ -69,6 +70,14 @@ public class AbitDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override

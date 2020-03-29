@@ -5,10 +5,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Subject;
+import ua.jackson.awsPractice.payload.request.UpdateAbitRequest;
 import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.FacultyRepo;
 import ua.jackson.awsPractice.repository.SpecRepo;
 import ua.jackson.awsPractice.service.AbiturientService;
+import ua.jackson.awsPractice.service.UpdateAbitService;
 
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class AbitController {
     @Autowired
     private AbiturientService abitS;
 
+    @Autowired
+    UpdateAbitService updateAbitService;
 
     @GetMapping(value = "/allAA")
     public List<Abiturient> allADD(){
@@ -37,10 +41,10 @@ public class AbitController {
 
     @CrossOrigin("http://localhost:4200")
     @PostMapping(value = "/addAbit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String addedAbitur(@RequestBody Abiturient abiturient){
-        this.abitRepos.save(abiturient);
-        System.out.println(abiturient);
-        return abiturient.toString();
+    public void addedAbitur(@RequestBody UpdateAbitRequest updateAbitRequest){
+
+        this.updateAbitService.updateAbbit(updateAbitRequest);
+        System.out.println(updateAbitRequest.toString());
     }
 
     @CrossOrigin("http://localhost:4200")

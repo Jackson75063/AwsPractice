@@ -16,16 +16,16 @@ import java.util.Set;
 
 
 @Entity
-@Table(	name = "Abiturients",
-        uniqueConstraints = {
+@Table(	name = "Abiturients"
+        /*uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
-        })
+        }*/)
 public class Abiturient {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idAbitCode;
 
     private String username;
@@ -49,7 +49,6 @@ public class Abiturient {
     private Set<Role> roles = new HashSet<>();
 
 
-
     @ManyToMany()
     @JsonIgnoreProperties("abiturients")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -66,14 +65,6 @@ public class Abiturient {
         this.password = password;
     }
 
-
-//    @ElementCollection(fetch = FetchType.LAZY)
-//    @CollectionTable(name = "ZNO_MARK", foreignKey = @ForeignKey(name = "ZNO_BALU"), joinColumns = @JoinColumn(name = "abit_id"))
-//    @MapKeyColumn(name = "Subject", length = 40)
-//    @MapKeyClass(Subject.class)
-//    @MapKeyEnumerated(EnumType.STRING)
-//    private Map<Subject,Float> znoSubjectList;
-
     public Set<ZNOOneSubject> getSubjs() {
         return subjs;
     }
@@ -81,14 +72,6 @@ public class Abiturient {
     public void setSubjs(Set<ZNOOneSubject> subjs) {
         this.subjs = subjs;
     }
-
-    /*
-    @JoinTable(name = "subjectTable", joinColumns = @JoinColumn(name = "idAbitCode"))
-    @Column(name = "subjects", nullable = false)
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Subject.class)
-    private List<Subject> znoSubjectList;
-*/
 
     public Abiturient() {
     }
@@ -173,6 +156,8 @@ public class Abiturient {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
 
     @Override
     public String toString() {
