@@ -14,7 +14,7 @@ import ua.jackson.awsPractice.service.UpdateAbitService;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 
 public class AbitController {
@@ -56,6 +56,26 @@ public class AbitController {
     @GetMapping("/max")
     public Abiturient maxAVG() {
         return abitS.abitWithMaxAvgMark();
+    }
+
+    @CrossOrigin("http://localhost:4200")
+    @GetMapping("/getById/{id}")
+    public Abiturient getOne(@PathVariable Long id) {
+        Abiturient one = this.abitRepos.getOne(id);
+
+        Abiturient abiturient = new Abiturient(
+                one.getIdAbitCode(),
+                one.getSurname(),
+                one.getPoBatkovi(),
+                one.getAvgDiplomaMark(),
+                one.getFaculties(),
+                one.getRequestCounter(),
+                one.getSubjs());
+
+        System.out.println(abiturient);
+        System.out.println("INSIDE");
+
+        return abiturient;
     }
 
     @DeleteMapping("/del/{id}")

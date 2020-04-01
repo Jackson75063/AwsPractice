@@ -6,10 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ua.jackson.awsPractice.entity.Abiturient;
+import ua.jackson.awsPractice.maptest.ZNOOneSubject;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AbitDetailsImpl implements UserDetails {
@@ -25,14 +24,17 @@ public class AbitDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+    private Set<ZNOOneSubject> subjs;
+
     public AbitDetailsImpl(Long id, String username, String surname, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities) {
+                           Collection<? extends GrantedAuthority> authorities, Set<ZNOOneSubject> subjs) {
         this.id = id;
         this.username = username;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.subjs = subjs;
     }
 
     public static AbitDetailsImpl build(Abiturient abiturient) {
@@ -46,7 +48,8 @@ public class AbitDetailsImpl implements UserDetails {
                 abiturient.getSurname(),
                 abiturient.getEmail(),
                 abiturient.getPassword(),
-                authorities);
+                authorities,
+                abiturient.getSubjs());
     }
 
     @Override
@@ -98,6 +101,14 @@ public class AbitDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Set<ZNOOneSubject> getSubjs() {
+        return subjs;
+    }
+
+    public void setSubjs(Set<ZNOOneSubject> subjs) {
+        this.subjs = subjs;
     }
 
     @Override

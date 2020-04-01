@@ -11,3 +11,4 @@ INSERT INTO abiturients(id_abit_code,avg_diploma_mark, email, password, po_batko
 
 INSERT INTO user_roles VALUES (3,1);
 
+update abiturients set password = crypt(password, gen_salt('bf', 8));

@@ -159,6 +159,16 @@ public class Abiturient {
 
 
 
+    public Abiturient(Long idAbitCode, String surname, String poBatkovi, Double avgDiplomaMark, List<Faculty> faculties, Integer requestCounter, Set<ZNOOneSubject> subjs) {
+        this.idAbitCode = idAbitCode;
+        this.surname = surname;
+        this.poBatkovi = poBatkovi;
+        this.avgDiplomaMark = avgDiplomaMark;
+        this.faculties = faculties;
+        this.requestCounter = requestCounter;
+        this.subjs = subjs;
+    }
+
     @Override
     public String toString() {
         return "Abiturient{" +
