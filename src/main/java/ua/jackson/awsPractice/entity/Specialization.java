@@ -1,6 +1,7 @@
 package ua.jackson.awsPractice.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,11 +15,21 @@ public class Specialization {
 
     private String specializationName;
 
-/*    @Enumerated(value = EnumType.STRING)
-    @Column(name = "requiredSubjects", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "subjects", nullable = false)
     @ElementCollection(targetClass = Subject.class)
-    Set<Subject> requiredSubjects;
+    Set<Subject> needSubjects = new HashSet<>();
 
+    public Set<Subject> getNeedSubjects() {
+        return needSubjects;
+    }
+
+    public void setNeedSubjects(Set<Subject> needSubjects) {
+        this.needSubjects = needSubjects;
+    }
+
+
+    /*
     @Enumerated(value = EnumType.STRING)
     @Column(name = "optionalSubjects", nullable = false)
     @ElementCollection(targetClass = Subject.class)
@@ -60,6 +71,16 @@ public class Specialization {
 
     public void setSpecializationName(String specializationName) {
         this.specializationName = specializationName;
+    }
+
+    @Override
+    public String toString() {
+        return "Specialization{" +
+                "id=" + id +
+                ", specializationCode=" + specializationCode +
+                ", specializationName='" + specializationName + '\'' +
+                ", needSubjects=" + needSubjects +
+                '}';
     }
 }
 /*

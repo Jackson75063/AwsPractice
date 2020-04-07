@@ -69,3 +69,10 @@ CREATE TABLE abiturient_subjs
     subject                 integer,
     subject_mark            integer
 );
+
+CREATE TABLE specialization_need_subjects
+(
+   specialization_id int8 not null,
+   subjects varchar(255) not null,
+   primary key (specialization_id, subjects)
+)

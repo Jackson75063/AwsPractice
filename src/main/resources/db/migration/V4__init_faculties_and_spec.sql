@@ -6,7 +6,19 @@ INSERT INTO faculty VALUES(16,'Деревооброблювальних техн
 
 
 INSERT INTO specialization VALUES(21,3233, 'Комп’ютерна інженерія');
+-- INSERT INTO  specialization_need_subjects VALUES (21,' MATH');
+INSERT INTO  specialization_need_subjects VALUES (21,' UKR_MOVA');
+INSERT INTO  specialization_need_subjects VALUES (21,' PHISIC');
+INSERT INTO  specialization_need_subjects VALUES (21,' MATH');
+
+
 INSERT INTO specialization VALUES(22,3234, 'Обслуговування програмних систем і комплексів');
+INSERT INTO  specialization_need_subjects VALUES (22,' UKR_MOVA');
+INSERT INTO  specialization_need_subjects VALUES (22,' PHISIC');
+INSERT INTO  specialization_need_subjects VALUES (22,' MATH');
+
+
+
 INSERT INTO specialization VALUES(23,3235, 'Кібернетика' );
 INSERT INTO specialization VALUES(24,3236, 'Інформаційна безпека');
 
@@ -19,8 +31,14 @@ INSERT INTO specialization VALUES(29,3336, 'Середня освіта (фіз�
 
 INSERT INTO specialization VALUES(30,4036, 'Деревообробні та меблеві технологі' );
 INSERT INTO specialization VALUES(31,4037, 'Технології захисту навколишнього середовища');
+INSERT INTO  specialization_need_subjects VALUES (31,' UKR_MOVA');
+INSERT INTO  specialization_need_subjects VALUES (31,' PHISIC');
+INSERT INTO  specialization_need_subjects VALUES (31,' MATH');
+
 
 INSERT INTO  faculty_specializations VALUES (12,21);
+
+
 INSERT INTO  faculty_specializations VALUES (12,22);
 INSERT INTO  faculty_specializations VALUES (12,23);
 INSERT INTO  faculty_specializations VALUES (12,24);
