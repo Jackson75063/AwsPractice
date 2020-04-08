@@ -23,13 +23,13 @@ public class FacultyController {
     @Autowired
     private FacultyRepo facultyRepo;
 
-    @Autowired
+   /* @Autowired
     private FacultyService facultyService;
-
+*/
     @Autowired
     private AbitRepos abitRepos;
 
-    @GetMapping("/allFa")
+   /* @GetMapping("/allFa")
     List<Faculty> faculties(){
         List<FacultyDto> facultsDTO = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class FacultyController {
 //
 //        all.stream().map(faculty -> facultsDTO.add(new FacultyDto(faculty.getFacultyName(), )))
 
-       /*
+       *//*
         all.stream().map(faculty -> facultsDTO.add(new FacuDTO(
                 faculty.getFacultyIdl(),
                 faculty.getFacultyName(),
@@ -48,11 +48,11 @@ public class FacultyController {
                 )
         ))).collect(Collectors.toList());
 
-*/
+*//*
 
 
         return facultyRepo.findAll();
-    }
+    }*/
 
     @GetMapping("/allFa/{id}")
     List<Faculty> faculties2(@PathVariable Long id) {
@@ -123,13 +123,13 @@ public class FacultyController {
         return facultyDto;
     }
 
-    @GetMapping("/allFaName")
+   /* @GetMapping("/allFaName")
     public List<String> name(){
 
 
 
 
         return this.facultyService.allFacultiesNameList();
-    }
+    }*/
 
 }
