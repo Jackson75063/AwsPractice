@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ua.jackson.awsPractice.entity.Abiturient;
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
+import ua.jackson.awsPractice.models.ZNOOneSubject;
 
 import java.util.*;
 import java.util.stream.Collectors;

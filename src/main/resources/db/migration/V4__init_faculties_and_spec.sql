@@ -12,7 +12,7 @@ INSERT INTO  specialization_need_subjects VALUES (21,' PHISIC');
 INSERT INTO  specialization_need_subjects VALUES (21,' MATH');
 
 
-INSERT INTO specialization VALUES(22,3234, 'Обслуговування програмних систем і комплексів');
+INSERT INTO  specialization VALUES(22,3234, 'Обслуговування програмних систем і комплексів');
 INSERT INTO  specialization_need_subjects VALUES (22,' UKR_MOVA');
 INSERT INTO  specialization_need_subjects VALUES (22,' PHISIC');
 INSERT INTO  specialization_need_subjects VALUES (22,' MATH');

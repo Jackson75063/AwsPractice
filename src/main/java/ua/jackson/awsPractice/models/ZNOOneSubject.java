@@ -1,4 +1,4 @@
-package ua.jackson.awsPractice.maptest;
+package ua.jackson.awsPractice.models;
 
 import ua.jackson.awsPractice.entity.Subject;
 

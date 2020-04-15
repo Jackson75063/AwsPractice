@@ -1,10 +1,6 @@
 package ua.jackson.awsPractice.payload.response;
 
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class JwtResponse {
     private String token;
@@ -14,16 +10,16 @@ public class JwtResponse {
     private String surname;
     private String email;
     private List<String> roles;
-    private Set<ZNOOneSubject> subjs = new HashSet<>(4);
+//    private Set<ZNOOneSubject> subjs = new HashSet<>(4);
 
-    public JwtResponse(String accessToken, Long id, String username, String surname, String email, List<String> roles, Set<ZNOOneSubject> subjs) {
+    public JwtResponse(String accessToken, Long id, String username, String surname, String email, List<String> roles/*, Set<ZNOOneSubject> subjs*/) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.surname = surname;
         this.email = email;
         this.roles = roles;
-        this.subjs = subjs;
+//        this.subjs = subjs;
     }
 
     public String getSurname() {
@@ -78,11 +74,11 @@ public class JwtResponse {
         return roles;
     }
 
-    public Set<ZNOOneSubject> getSubjs() {
-        return subjs;
-    }
+//    public Set<ZNOOneSubject> getSubjs() {
+//        return subjs;
+//    }
 
-    public void setSubjs(Set<ZNOOneSubject> subjs) {
-        this.subjs = subjs;
-    }
+//    public void setSubjs(Set<ZNOOneSubject> subjs) {
+//        this.subjs = subjs;
+//    }
 }

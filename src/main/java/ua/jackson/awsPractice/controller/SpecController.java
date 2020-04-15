@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Specialization;
 import ua.jackson.awsPractice.entity.Subject;
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
+import ua.jackson.awsPractice.models.ZNOOneSubject;
 import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.SpecRepo;
 import ua.jackson.awsPractice.security.service.AbitDetailsServiceImpl;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,6 +36,9 @@ public class SpecController {
 
 //    @CrossOrigin("http://localhost:4200")
     public String addedSpec(@RequestBody Specialization specialization){
+
+
+        Random random = new Random();
 
         this.specRepo.save(specialization);
         System.out.println(specialization);
