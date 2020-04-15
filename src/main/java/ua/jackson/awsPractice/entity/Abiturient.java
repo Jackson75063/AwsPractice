@@ -1,9 +1,11 @@
 package ua.jackson.awsPractice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
+import ua.jackson.awsPractice.jsonVIew.Views;
+import ua.jackson.awsPractice.models.ZNOOneSubject;
 import ua.jackson.awsPractice.models.Role;
 
 import javax.persistence.*;
@@ -14,20 +16,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 @Entity
 @Table(	name = "Abiturients"
         /*uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         }*/)
+@JsonView(Views.Public.class)
 public class Abiturient {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idAbitCode;
-
     private String username;
     private String surname;
     private String poBatkovi;
@@ -49,15 +50,54 @@ public class Abiturient {
     private Set<Role> roles = new HashSet<>();
 
 
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnoreProperties("abiturients")
+    @JoinTable(	name = "abit_faculties",
+            joinColumns = @JoinColumn(name = "abit_id"),
+            inverseJoinColumns = @JoinColumn(name = "faculty_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Faculty> faculties;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(	name = "abit_spec",
+            joinColumns = @JoinColumn(name = "abit_id"),
+            inverseJoinColumns = @JoinColumn(name = "spec_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties("abiturients")
+    private List<Specialization> specializations;
+
+/*
+    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties("abiturients")
+    @JoinTable(	name = "abit_spec",
+            joinColumns = @JoinColumn(name = "abit_id"),
+            inverseJoinColumns = @JoinColumn(name = "spec_id"))
+    private Set<Specialization> specializations = new HashSet<>();
+*/
+
+/*
+
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name = "abit_speccs",
+            joinColumns = @JoinColumn(name = "abit_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "specc_id", referencedColumnName = "id"),
+            uniqueConstraints={@UniqueConstraint(columnNames={"abit_id", "specc_id"})})
+    @JsonIgnoreProperties("abiturients")
+    private List<Specialization> specializations;*/
 
     private Integer requestCounter;
 
     @ElementCollection
     private Set<ZNOOneSubject> subjs = new HashSet<>(4);
+
+    public List<Specialization> getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(List<Specialization> specializations) {
+        this.specializations = specializations;
+    }
 
     public Abiturient(String username, String email, String password) {
         this.username = username;
@@ -158,7 +198,6 @@ public class Abiturient {
     }
 
 
-
     public Abiturient(Long idAbitCode, String surname, String poBatkovi, Double avgDiplomaMark, List<Faculty> faculties, Integer requestCounter, Set<ZNOOneSubject> subjs) {
         this.idAbitCode = idAbitCode;
         this.surname = surname;
@@ -181,8 +220,23 @@ public class Abiturient {
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 ", faculties=" + faculties +
+                ", specializations=" + specializations +
                 ", requestCounter=" + requestCounter +
                 ", subjs=" + subjs +
                 '}';
+    }
+
+    public Abiturient(Long idAbitCode, String username, String surname, String poBatkovi, Double avgDiplomaMark, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, Set<Role> roles, List<Faculty> faculties, Integer requestCounter, Set<ZNOOneSubject> subjs) {
+        this.idAbitCode = idAbitCode;
+        this.username = username;
+        this.surname = surname;
+        this.poBatkovi = poBatkovi;
+        this.avgDiplomaMark = avgDiplomaMark;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.faculties = faculties;
+        this.requestCounter = requestCounter;
+        this.subjs = subjs;
     }
 }

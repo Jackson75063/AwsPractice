@@ -1,6 +1,6 @@
 package ua.jackson.awsPractice.payload.request;
 
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
+import ua.jackson.awsPractice.models.ZNOOneSubject;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,10 +1,6 @@
 package ua.jackson.awsPractice.payload.response;
 
-import ua.jackson.awsPractice.maptest.ZNOOneSubject;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class JwtResponse {
     private String token;

@@ -1,13 +1,13 @@
 package ua.jackson.awsPractice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Faculty {
 
     @Id
@@ -16,13 +16,14 @@ public class Faculty {
 
     private String facultyName;
 
-  /*  @ManyToMany
+    @ManyToMany
     @JsonIgnoreProperties("faculties")
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Abiturient> abiturients;
-*/
+
     @OneToMany
-    private Set<Specialization> specializations;
+    @JsonIgnoreProperties("abiturients")
+    private List<Specialization> specializations;
 
     public Faculty() {
     }
@@ -43,11 +44,11 @@ public class Faculty {
         this.facultyName = facultyName;
     }
 
-    public Set<Specialization> getSpecializations() {
+    public List<Specialization> getSpecializations() {
         return specializations;
     }
 
-    public void setSpecializations(Set<Specialization> specializations) {
+    public void setSpecializations(List<Specialization> specializations) {
         this.specializations = specializations;
     }
 
@@ -75,4 +76,19 @@ public class Faculty {
     public void setAbiturients(Set<Abiturient> abiturients) {
         this.abiturients = abiturients;
     }*/
+
+    public Faculty(Long facultyIdl, String facultyName, Set<Abiturient> abiturients, List<Specialization> specializations) {
+        this.facultyIdl = facultyIdl;
+        this.facultyName = facultyName;
+        this.abiturients = abiturients;
+        this.specializations = specializations;
+    }
+
+    public Set<Abiturient> getAbiturients() {
+        return abiturients;
+    }
+
+    public void setAbiturients(Set<Abiturient> abiturients) {
+        this.abiturients = abiturients;
+    }
 }

@@ -121,4 +121,10 @@ public class AbitController {
 
         return new ResponseEntity<List<Abiturient>>(list, new HttpHeaders(), HttpStatus.OK);
     }*/
+
+    @GetMapping("/save")
+    public void  saveAbit(@RequestBody Abiturient abiturient){
+        System.out.println(abiturient);
+        this.abitRepos.save(abiturient);
+    }
 }
