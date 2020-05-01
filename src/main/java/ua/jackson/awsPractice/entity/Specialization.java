@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Specialization {
 
     @Id
@@ -23,7 +24,19 @@ public class Specialization {
     @ElementCollection(targetClass = Subject.class)
     Set<Subject> needSubjects = new HashSet<>();
 
-/*    @ManyToMany(mappedBy = "idAbitCode")
+    @OneToMany
+    @JsonIgnoreProperties("abiturients")
+    private List<Abiturient> abiturients;
+
+    public List<Abiturient> getAbiturients() {
+        return abiturients;
+    }
+
+    public void setAbiturients(List<Abiturient> abiturients) {
+        this.abiturients = abiturients;
+    }
+
+    /*    @ManyToMany(mappedBy = "idAbitCode")
     @JsonIgnoreProperties("Specialization")
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Abiturient> abiturients;
@@ -101,6 +114,13 @@ public class Specialization {
     }
 
 
+    public Specialization(Long id, Short specializationCode, String specializationName, Set<Subject> needSubjects, List<Abiturient> abiturients) {
+        this.id = id;
+        this.specializationCode = specializationCode;
+        this.specializationName = specializationName;
+        this.needSubjects = needSubjects;
+        this.abiturients = abiturients;
+    }
 
     @Override
     public String toString() {
@@ -112,30 +132,3 @@ public class Specialization {
                 '}';
     }
 }
-/*
-    public Set<Subject> getRequiredSubjects() {
-        return requiredSubjects;
-    }
-
-    public void setRequiredSubjects(Set<Subject> requiredSubjects) {
-        this.requiredSubjects = requiredSubjects;
-    }
-
-    public Set<Subject> getOptionalSubjecst() {
-        return optionalSubjecst;
-    }
-
-    public void setOptionalSubjecst(Set<Subject> optionalSubjecst) {
-        this.optionalSubjecst = optionalSubjecst;
-    }
-}*/
-/*
-
-{
-        "id":1,
-        "specializationCode" : 10,
-        "specializationName" : "newName",
-        "requiredSubjects" : ["MATH"],
-        "optionalSubjecst" : ["MATH"]
-        }
-        */

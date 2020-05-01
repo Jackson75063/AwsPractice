@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "username"),
                 @UniqueConstraint(columnNames = "email")
         }*/)
-@JsonView(Views.Public.class)
+//@JsonView(Views.Public.class)
 public class Abiturient {
 
 
@@ -50,7 +51,7 @@ public class Abiturient {
     private Set<Role> roles = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("abiturients")
     @JoinTable(	name = "abit_faculties",
             joinColumns = @JoinColumn(name = "abit_id"),
@@ -58,35 +59,15 @@ public class Abiturient {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Faculty> faculties;
 
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("abiturients")
     @JoinTable(	name = "abit_spec",
             joinColumns = @JoinColumn(name = "abit_id"),
             inverseJoinColumns = @JoinColumn(name = "spec_id"))
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnoreProperties("abiturients")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Specialization> specializations;
 
-/*
-    @ManyToMany(fetch = FetchType.LAZY)
-//    @JsonIgnoreProperties("abiturients")
-    @JoinTable(	name = "abit_spec",
-            joinColumns = @JoinColumn(name = "abit_id"),
-            inverseJoinColumns = @JoinColumn(name = "spec_id"))
-    private Set<Specialization> specializations = new HashSet<>();
-*/
-
-/*
-
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    @JoinTable(name = "abit_speccs",
-            joinColumns = @JoinColumn(name = "abit_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "specc_id", referencedColumnName = "id"),
-            uniqueConstraints={@UniqueConstraint(columnNames={"abit_id", "specc_id"})})
-    @JsonIgnoreProperties("abiturients")
-    private List<Specialization> specializations;*/
-
-    private Integer requestCounter;
+    private Integer requestCounter = 5;
 
     @ElementCollection
     private Set<ZNOOneSubject> subjs = new HashSet<>(4);
@@ -208,6 +189,21 @@ public class Abiturient {
         this.subjs = subjs;
     }
 
+    public Abiturient(Long idAbitCode, String username, String surname, String poBatkovi, Double avgDiplomaMark, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, Set<Role> roles, List<Faculty> faculties, List<Specialization> specccccccccccccccc, List<Specialization> specializations, Integer requestCounter, Set<ZNOOneSubject> subjs) {
+        this.idAbitCode = idAbitCode;
+        this.username = username;
+        this.surname = surname;
+        this.poBatkovi = poBatkovi;
+        this.avgDiplomaMark = avgDiplomaMark;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.faculties = faculties;
+        this.specializations = specializations;
+        this.requestCounter = requestCounter;
+        this.subjs = subjs;
+    }
+
     @Override
     public String toString() {
         return "Abiturient{" +
@@ -226,17 +222,29 @@ public class Abiturient {
                 '}';
     }
 
-    public Abiturient(Long idAbitCode, String username, String surname, String poBatkovi, Double avgDiplomaMark, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, Set<Role> roles, List<Faculty> faculties, Integer requestCounter, Set<ZNOOneSubject> subjs) {
-        this.idAbitCode = idAbitCode;
-        this.username = username;
-        this.surname = surname;
-        this.poBatkovi = poBatkovi;
-        this.avgDiplomaMark = avgDiplomaMark;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.faculties = faculties;
-        this.requestCounter = requestCounter;
-        this.subjs = subjs;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Abiturient that = (Abiturient) o;
+        return Objects.equals(idAbitCode, that.idAbitCode) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(poBatkovi, that.poBatkovi) &&
+                Objects.equals(avgDiplomaMark, that.avgDiplomaMark) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(roles, that.roles) &&
+                Objects.equals(faculties, that.faculties) &&
+                Objects.equals(specializations, that.specializations) &&
+                Objects.equals(requestCounter, that.requestCounter) &&
+                Objects.equals(subjs, that.subjs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idAbitCode, username, surname, poBatkovi, avgDiplomaMark, email, password, roles, faculties, specializations, requestCounter, subjs);
     }
 }

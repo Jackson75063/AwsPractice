@@ -3,6 +3,7 @@ package ua.jackson.awsPractice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ua.jackson.awsPractice.dto.AbitDTO;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Subject;
 import ua.jackson.awsPractice.payload.request.UpdateAbitRequest;
@@ -43,6 +44,10 @@ public class AbitController {
     @PostMapping(value = "/addAbit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addedAbitur(@RequestBody UpdateAbitRequest updateAbitRequest){
 
+        System.out.println();
+        System.out.println("ADD ABIT WAS CALLLLLEDEDE");
+        System.out.println();
+
         this.updateAbitService.updateAbbit(updateAbitRequest);
         System.out.println(updateAbitRequest.toString());
     }
@@ -60,22 +65,43 @@ public class AbitController {
 
     @CrossOrigin("http://localhost:4200")
     @GetMapping("/getById/{id}")
-    public Abiturient getOne(@PathVariable Long id) {
+    public AbitDTO getOne(@PathVariable Long id) {
         Abiturient one = this.abitRepos.getOne(id);
 
-        Abiturient abiturient = new Abiturient(
+
+
+    /*    System.out.println("one.getSpecializations().size() " +one.getSpecializations().size());
+        System.out.println("one.getSpecializations().size() " +abiturient.getSpecializations().size());
+
+        abiturient.setSpecializations(one.getSpecializations());
+
+        System.out.println();
+
+        System.out.println("one.getSpecializations().size() " +one.getSpecializations().size());
+        System.out.println("one.getSpecializations().size() " +abiturient.getSpecializations().size());
+
+*/
+
+        System.out.println(new AbitDTO(
                 one.getIdAbitCode(),
                 one.getSurname(),
                 one.getPoBatkovi(),
                 one.getAvgDiplomaMark(),
                 one.getFaculties(),
                 one.getRequestCounter(),
-                one.getSubjs());
-
-        System.out.println(abiturient);
+                one.getSubjs(),
+                one.getSpecializations()));
         System.out.println("INSIDE");
 
-        return abiturient;
+        return new AbitDTO(
+                one.getIdAbitCode(),
+                one.getSurname(),
+                one.getPoBatkovi(),
+                one.getAvgDiplomaMark(),
+                one.getFaculties(),
+                one.getRequestCounter(),
+                one.getSubjs(),
+                one.getSpecializations());
     }
 
     @DeleteMapping("/del/{id}")

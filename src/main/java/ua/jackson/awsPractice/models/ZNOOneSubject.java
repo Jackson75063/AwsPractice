@@ -3,6 +3,7 @@ package ua.jackson.awsPractice.models;
 import ua.jackson.awsPractice.entity.Subject;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class ZNOOneSubject {
@@ -41,5 +42,21 @@ public class ZNOOneSubject {
                 "subject=" + subject +
                 ", subjectMark=" + subjectMark +
                 '}';
+    }
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ZNOOneSubject that = (ZNOOneSubject) o;
+        return subject == that.subject &&
+                Objects.equals(subjectMark, that.subjectMark);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subject, subjectMark);
     }
 }

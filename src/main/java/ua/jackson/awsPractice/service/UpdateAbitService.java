@@ -12,11 +12,9 @@ public class UpdateAbitService {
     @Autowired
     AbitRepos abitRepos;
 
-
     public void updateAbbit(UpdateAbitRequest updateAbitRequest){
         Abiturient one = abitRepos.getOne(updateAbitRequest.getIdAbitCode());
         one.setSubjs(updateAbitRequest.getSubjs());
         abitRepos.save(one);
     }
-
 }

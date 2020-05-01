@@ -52,30 +52,6 @@ public class Faculty {
         this.specializations = specializations;
     }
 
-//    public Set<Abiturient> getAbiturients() {
-//        return abiturients;
-//    }
-//
-//    public void setAbiturients(Set<Abiturient> abiturients) {
-//        this.abiturients = abiturients;
-//    }
-
-    @Override
-    public String toString() {
-        return "Faculty{" +
-                "facultyIdl=" + facultyIdl +
-                ", facultyName='" + facultyName + '\'' +
-                ", specializations=" + specializations +
-                '}';
-    }
-
-    /*public Set<Abiturient> getAbiturients() {
-        return abiturients;
-    }
-
-    public void setAbiturients(Set<Abiturient> abiturients) {
-        this.abiturients = abiturients;
-    }*/
 
     public Faculty(Long facultyIdl, String facultyName, Set<Abiturient> abiturients, List<Specialization> specializations) {
         this.facultyIdl = facultyIdl;
@@ -90,5 +66,14 @@ public class Faculty {
 
     public void setAbiturients(Set<Abiturient> abiturients) {
         this.abiturients = abiturients;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty{" +
+                "facultyIdl=" + facultyIdl +
+                ", facultyName='" + facultyName + '\'' +
+                ", specializations=" + specializations +
+                '}';
     }
 }

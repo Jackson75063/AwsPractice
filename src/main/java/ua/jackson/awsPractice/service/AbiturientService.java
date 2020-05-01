@@ -2,6 +2,7 @@ package ua.jackson.awsPractice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.jackson.awsPractice.dto.AbitDTO;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Faculty;
 import ua.jackson.awsPractice.entity.Subject;
@@ -18,6 +19,21 @@ public class AbiturientService {
 
     @Autowired
     private AbitRepos abitRepos;
+
+
+    public AbitDTO getAbitById(Long id){
+        Abiturient one = this.abitRepos.getOne(id);
+
+        return new AbitDTO(
+                one.getIdAbitCode(),
+                one.getSurname(),
+                one.getPoBatkovi(),
+                one.getAvgDiplomaMark(),
+                one.getFaculties(),
+                one.getRequestCounter(),
+                one.getSubjs(),
+                one.getSpecializations());
+    }
 
 
     public Abiturient abitWithMaxAvgMark(){
@@ -47,7 +63,7 @@ public class AbiturientService {
         facultName = "string";
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-        List<Double> collect1 = abitRepos.findAll().stream().map(Abiturient::getAvgDiplomaMark).collect(Collectors.toList());
+        List<Long> collect1 = abitRepos.findAll().stream().map(x-> x.getIdAbitCode()).collect(Collectors.toList());
         collect1.forEach(System.out::println);
 
         System.out.println(collect1.size());
