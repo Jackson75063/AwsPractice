@@ -11,6 +11,7 @@ import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.FacultyRepo;
 import ua.jackson.awsPractice.repository.SpecRepo;
 import ua.jackson.awsPractice.service.AbiturientService;
+import ua.jackson.awsPractice.service.MailSender;
 import ua.jackson.awsPractice.service.UpdateAbitService;
 
 import java.util.List;
@@ -152,5 +153,20 @@ public class AbitController {
     public void  saveAbit(@RequestBody Abiturient abiturient){
         System.out.println(abiturient);
         this.abitRepos.save(abiturient);
+    }
+
+    @Autowired
+    MailSender mailSender;
+
+//    @Autowired
+//    SendEmail sendEmail;
+
+    @GetMapping("/send")
+    public void sendMessage(){
+
+//        mailSender.sendSimpleMessage();
+        mailSender.sendSimpleMessage();
+//        mailSender.sendSimpleMessage("taras.galyuk.98@gmail.com","Test","Hello from spring boot app");
+        System.out.println("WAS SENDED");
     }
 }

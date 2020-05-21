@@ -43,7 +43,7 @@ public class AuthController {
 
     @Autowired
 //    UserRepository userRepository;
-    AbitRepos abitRepos;
+            AbitRepos abitRepos;
 
     @Autowired
     RoleRepository roleRepository;
@@ -77,40 +77,21 @@ public class AuthController {
                 userDetails.getSurname(),
                 userDetails.getEmail(),
                 roles
-//                ,
-//                userDetails.getSubjs()
         ));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-       /* if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-*/
         if (abitRepos.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse(" Email уже використовується!"));
         }
 
-        // Create new user's account
-//        User user = new User(signUpRequest.getUsername(),
-//                signUpRequest.getEmail(),
-//                encoder.encode(signUpRequest.getPassword()));
 
         Abiturient user = new Abiturient(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-/*
-
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-*/
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

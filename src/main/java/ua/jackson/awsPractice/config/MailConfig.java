@@ -28,53 +28,54 @@ public class MailConfig {
     @Value("${mail.debug}")
     private String debug;
 
-//    @Value("${spring.mail.properties.mail.smtp.auth}")
-//    private String auth;
-//
-//    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-//    private String enable;
+    @Value("${spring.mail.properties.mail.smtp.auth}")
+    private String auth;
 
-//    @Bean
-//    public JavaMailSender getMailSender() {
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//
-//        mailSender.setHost(host);
-//        mailSender.setPort(port);
-//        mailSender.setUsername(username);
-//        mailSender.setPassword(password);
-//
-//        Properties properties = mailSender.getJavaMailProperties();
-//
-//        properties.setProperty("mail.transport.protocol", protocol);
-//        properties.setProperty("mail.debug", debug);
-//
-////        properties.setProperty("mail.smtp.auth", auth);
-////        properties.setProperty("mail.smtp.starttls.enable", enable);
-//
-//        return mailSender;
-//    }
+    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+    private String enable;
 
     @Bean
-    public JavaMailSender getJavaMailSender() {
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
 
-        mailSender.setUsername("testphpmailo888@gmail.com");
-        mailSender.setPassword("Jackson750");
+        mailSender.setUsername(username);
+        mailSender.setPassword(password);
 
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        Properties properties = mailSender.getJavaMailProperties();
 
-//        props.setProperty("mail.transport.protocol", "smtp");
-//        props.setProperty("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.socketFactory.port", "465");
+        properties.put("mail.debug", debug);
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+        properties.setProperty("mail.smtp.auth", auth);
+        properties.setProperty("mail.smtp.starttls.enable", enable);
 
         return mailSender;
     }
+//
+//    @Bean
+//    public JavaMailSender getJavaMailSender() {
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        mailSender.setHost("smtp.gmail.com");
+//        mailSender.setPort(587);
+//
+//        mailSender.setUsername("testphpmailo888@gmail.com");
+//        mailSender.setPassword("Jackson750");
+//
+//        Properties props = mailSender.getJavaMailProperties();
+//        props.put("mail.transport.protocol", "smtp");
+//        props.put("mail.smtp.auth", "true");
+//        props.put("mail.smtp.starttls.enable", "true");
+//        props.put("mail.debug", "true");
+//        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+//
+////        props.setProperty("mail.transport.protocol", "smtp");
+////        props.setProperty("mail.smtp.starttls.enable", "true");
+//
+//        return mailSender;
+//    }
 
 }
 

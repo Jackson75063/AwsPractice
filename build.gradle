@@ -56,6 +56,9 @@ dependencies {
 
 	compile "org.flywaydb:flyway-core:5.2.4"
 
+//	compile "org.springframework.boot:spring-boot-starter-mail:2.0.1.RELEASE"
+	compile "org.springframework.boot:spring-boot-starter-mail:2.2.5.RELEASE"
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
