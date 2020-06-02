@@ -1,11 +1,15 @@
 package ua.jackson.awsPractice.controller;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.jackson.awsPractice.dto.AbitDTO;
 import ua.jackson.awsPractice.entity.Abiturient;
 import ua.jackson.awsPractice.entity.Subject;
+import ua.jackson.awsPractice.mail.MailMessageSendRequst;
 import ua.jackson.awsPractice.payload.request.UpdateAbitRequest;
 import ua.jackson.awsPractice.repository.AbitRepos;
 import ua.jackson.awsPractice.repository.FacultyRepo;
@@ -14,7 +18,10 @@ import ua.jackson.awsPractice.service.AbiturientService;
 import ua.jackson.awsPractice.service.MailSender;
 import ua.jackson.awsPractice.service.UpdateAbitService;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -161,12 +168,37 @@ public class AbitController {
 //    @Autowired
 //    SendEmail sendEmail;
 
-    @GetMapping("/send")
-    public void sendMessage(){
-
-//        mailSender.sendSimpleMessage();
-        mailSender.sendSimpleMessage();
-//        mailSender.sendSimpleMessage("taras.galyuk.98@gmail.com","Test","Hello from spring boot app");
-        System.out.println("WAS SENDED");
+    @PostMapping("/send")
+    public void sendMessage(@RequestBody MailMessageSendRequst mailMessageSendRequst ){
+        mailSender.sendSimpleMessage(
+                mailMessageSendRequst.getTo(),
+                mailMessageSendRequst.getSubject(),
+                mailMessageSendRequst.getText());
+        System.out.println("Message was sended");
     }
+
+
+
+    @GetMapping("/par")
+    public void parse() throws IOException {
+
+        String url = "http://idtd.nltu.edu.ua/ua/news/list";
+        Document doc = Jsoup.connect(url).get();
+        doc.select("a").forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("---------");
+        System.out.println();
+
+        Document doc2 = Jsoup.connect(url).get();
+        System.out.println(doc2.body());
+
+//        doc.select("<a>")
+        Elements select = doc.select("a[href]");
+        System.out.println(select);
+            Map<String,String> aa = new HashMap<>();
+//            aa.compute("aa","aaa");
+    }
+
+
 }
